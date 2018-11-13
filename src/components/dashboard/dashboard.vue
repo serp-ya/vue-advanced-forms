@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import iAxios from '../../iAxios';
 
 export default {
   data() {
@@ -17,7 +17,7 @@ export default {
   },
   
   created() {
-    axios.get('/users.json')
+    iAxios.get('/users.json')
       .then(res => {
         const { data } = res;
         const users = Object.keys(data).map(key => {
