@@ -78,7 +78,7 @@
           <label for="terms">Accept Terms of Use</label>
         </div>
         <div class="submit">
-          <button type="submit">Submit</button>
+          <button type="submit" :disabled="$v.$invalid">Submit</button>
         </div>
       </form>
     </div>
@@ -86,6 +86,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { 
   required,
   email,
@@ -113,6 +114,17 @@ export default {
     email: {
       required,
       email,
+      unique: val => {
+        if (val === '') {
+          return true;
+        }
+        return axios.get(`/users.json?orderBy="email"&equalTo="${val}"`)
+          .then(res => Object.keys(res.data).length === 0)
+          .catch(err => {
+            console.error(err);
+            alert('Email validation request error');
+          });
+      },
     },
     age: {
       required,
