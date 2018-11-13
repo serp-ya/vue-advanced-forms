@@ -69,6 +69,8 @@
 </template>
 
 <script>
+  import axios from 'axios';
+
   export default {
     data () {
       return {
@@ -101,7 +103,11 @@
           country: this.country,
           hobbies: this.hobbyInputs.map(hobby => hobby.value),
           terms: this.terms
-        }
+        };
+
+        axios.post('/users.json', formData)
+        .then(res => console.log('singup res', res))
+        .catch(err => console.log('singup err', err));
         console.log(formData)
       }
     }
