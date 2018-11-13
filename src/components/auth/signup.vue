@@ -69,8 +69,6 @@
 </template>
 
 <script>
-import iAxios from '../../iAxios';
-
 export default {
   data () {
     return {
@@ -105,13 +103,8 @@ export default {
         terms: this.terms
       };
 
-      iAxios.post('/signupNewUser?key=AIzaSyAg8L_1ZcmpYdcvmJI9wy6EnxL5v04u8nU', {
-        email: formData.email,
-        password: formData.password,
-        returnSecureToken: true,
-      })
-      .then(res => console.log('singup res', res))
-      .catch(err => console.log('singup err', err));
+      this.$store.dispatch('singup', formData);
+
       console.log(formData)
     }
   }

@@ -17,21 +17,6 @@ export default {
   },
   
   created() {
-    iAxios.get('/users.json')
-      .then(res => {
-        const { data } = res;
-        const users = Object.keys(data).map(key => {
-          const user = data[key];
-          user.id = key;
-          return user;
-        });
-        console.log('users', users);
-        this.email = users[0].email;
-      })
-      .catch(err => {
-        console.log(err);
-        alert('get users error');
-      });
   }
 };
 </script>
