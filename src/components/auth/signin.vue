@@ -25,6 +25,8 @@
 </template>
 
 <script>
+  import iAxios from '../../iAxios';
+
   export default {
     data () {
       return {
@@ -38,6 +40,13 @@
           email: this.email,
           password: this.password,
         }
+        iAxios.post('/verifyPassword?key=AIzaSyAg8L_1ZcmpYdcvmJI9wy6EnxL5v04u8nU', {
+          email: formData.email,
+          password: formData.password,
+          returnSecureToken: true,
+        })
+        .then(res => console.log('singup res', res))
+        .catch(err => console.log('singup err', err));
         console.log(formData)
       }
     }
